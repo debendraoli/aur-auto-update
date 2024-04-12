@@ -1,7 +1,0 @@
-nvchecker:
-  github: FEniCS/dolfinx
-  source: github
-  use_latest_release: true
-  prefix: v
-test: true
-oldver: 0.6.0

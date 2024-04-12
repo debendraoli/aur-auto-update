@@ -1,6 +1,0 @@
-nvchecker:
-  github: NickvisionApps/Denaro
-  source: github
-  use_latest_release: true
-test: true
-oldver: 2024.2.0

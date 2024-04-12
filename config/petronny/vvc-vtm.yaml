@@ -1,9 +1,0 @@
-nvchecker:
-  gitlab: jvet/VVCSoftware_VTM
-  host: vcgit.hhi.fraunhofer.de
-  source: gitlab
-  use_max_tag: true
-  prefix: VTM-
-test: true
-
-oldver: 23.1

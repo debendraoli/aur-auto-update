@@ -1,5 +1,0 @@
-nvchecker:
-  source: github
-  github: mkubecek/vmware-host-modules
-  branch: workstation-17.5.1
-test: true

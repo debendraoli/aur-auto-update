@@ -76,6 +76,10 @@ jobs:
     container:
       image: archlinux
 
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
       - uses: arch4edu/cactus/actions/upgrade-archlinux@main
 
@@ -84,7 +88,7 @@ jobs:
 
       - uses: actions/checkout@master
         with:
-          token: ${{ secrets._GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: petronny/git-config-user@master
 
@@ -96,7 +100,7 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" | install -Dm400 /dev/stdin /root/.ssh/aur
           cp ssh_config /root/.ssh/config
           git config --global user.name 'Auto update bot'
-          git config --global user.email 'auto-update-bot@arch4edu.org'
+          git config --global user.email 'aur-bot@debendra.me'
           useradd makepkg
 
       - name: Push ${{ github.event.inputs.pkgbase }} ${{ inputs.pkgver }} to AUR

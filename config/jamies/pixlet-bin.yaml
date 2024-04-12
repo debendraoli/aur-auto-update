@@ -1,7 +1,0 @@
-nvchecker:
-  github: tidbyt/pixlet
-  source: github
-  use_latest_release: true
-  prefix: v
-test: true
-oldver: 0.30.2

@@ -1,7 +1,0 @@
-nvchecker:
-  github: cp2k/cp2k
-  source: github
-  use_latest_release: true
-  prefix: v
-test: true
-oldver: 2024.1

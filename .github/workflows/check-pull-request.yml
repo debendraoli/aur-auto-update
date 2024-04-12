@@ -9,6 +9,10 @@ jobs:
     container:
       image: archlinux
 
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
       - uses: arch4edu/cactus/actions/upgrade-archlinux@main
 
@@ -22,5 +26,5 @@ jobs:
       - name: Check nvchecker.toml
         run: |
           git config --global --add safe.directory $(realpath .)
-          sed "s/GITHUB_TOKEN/${{ secrets.GITHUB_TOKEN}}/" -i keyfile.toml
+          sed "s/__GITHUB_TOKEN__/${{ secrets.GITHUB_TOKEN}}/" -i keyfile.toml
           python check-pr.py

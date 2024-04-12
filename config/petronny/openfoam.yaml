@@ -1,8 +1,0 @@
-nvchecker:
-  github: OpenFOAM/OpenFOAM-11
-  source: github
-  use_latest_tag: true
-  from_pattern: ^
-  to_pattern: '11.'
-test: true
-oldver: 11.20240116

@@ -1,6 +1,7 @@
 nvchecker:
-  github: NickvisionApps/cavalier
   source: github
+  github: telegramdesktop/tdesktop
   use_latest_release: true
+  prefix: v
 test: true
-oldver: 2024.1.0
+oldver: 5.2.1

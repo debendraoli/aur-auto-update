@@ -1,6 +1,0 @@
-nvchecker:
-  github: pypa/pip
-  source: github
-  use_max_tag: true
-test: true
-oldver: 24.0
