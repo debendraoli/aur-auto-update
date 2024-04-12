@@ -1,7 +1,0 @@
-nvchecker:
-  source: github
-  github: telegramdesktop/tdesktop
-  use_latest_release: true
-  prefix: v
-test: true
-oldver: 5.2.1
