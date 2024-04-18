@@ -34,7 +34,7 @@ for line in lines:
                 print(f"{package} doesn't exist on AUR.")
                 continue
             if test:
-                github.get_repo('arch4edu/aur-auto-update').get_workflow("build.yml").create_dispatch('main', {'pkgbase': package, 'pkgver': version})
+                github.get_repo('debendraoli/aur-auto-update').get_workflow("build.yml").create_dispatch('main', {'pkgbase': package, 'pkgver': version})
                 print(f"Triggered build test for {package} {version}.")
             elif flag:
                 print(f"TODO: Flag {package} on AUR.")

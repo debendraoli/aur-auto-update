@@ -10,7 +10,6 @@ jobs:
       image: archlinux
 
     permissions:
-      contents: read
       pull-requests: write
 
     steps:
@@ -26,5 +25,5 @@ jobs:
       - name: Check nvchecker.toml
         run: |
           git config --global --add safe.directory $(realpath .)
-          sed "s/__GITHUB_TOKEN__/${{ secrets.GITHUB_TOKEN}}/" -i keyfile.toml
+          sed "s/__GITHUB_TOKEN__/${{ secrets.GITHUB_TOKEN}}/" -i config/keyfile.toml
           python check-pr.py
