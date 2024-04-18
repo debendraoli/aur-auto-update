@@ -1,0 +1,7 @@
+nvchecker:
+  source: github
+  github: kurtosis-tech/kurtosis
+  use_latest_release: true
+  prefix: v
+test: true
+oldver: 5.2.1
