@@ -1,0 +1,7 @@
+nvchecker:
+  source: github
+  github: HugoByte/DIVE
+  use_latest_release: true
+  prefix: v
+test: true
+oldver: 0.1.2
