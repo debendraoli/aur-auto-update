@@ -13,10 +13,6 @@ jobs:
     container:
       image: archlinux
 
-    permissions:
-      contents: read
-      actions: write
-
     steps:
       - uses: arch4edu/cactus/actions/upgrade-archlinux@main
 
@@ -27,7 +23,7 @@ jobs:
 
       - name: Run nvchecker
         run: |
-          sed "s/__GITHUB_TOKEN__/${{ secrets.GITHUB_TOKEN }}/" -i config/keyfile.toml
+          sed "s/__GITHUB_TOKEN__/${{ secrets.__GITHUB_TOKEN__ }}/" -i config/keyfile.toml
           sed 's/#keyfile/keyfile/' -i config/__config__.toml
           python nvchecker.py
           set -o pipefail
