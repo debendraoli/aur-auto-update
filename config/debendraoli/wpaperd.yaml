@@ -1,0 +1,7 @@
+nvchecker:
+  source: github
+  github: danyspin97/wpaperd
+  use_latest_release: true
+  prefix: v
+test: true
+oldver: 0.3.0
