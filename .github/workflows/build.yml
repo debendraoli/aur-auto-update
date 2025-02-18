@@ -9,6 +9,10 @@ on:
         required: true
       pkgver:
         required: true
+      clean-up-ubuntu:
+        required: false
+        type: boolean
+        default: false
 
 jobs:
 
@@ -34,6 +38,7 @@ jobs:
       - uses: actions/checkout@master
 
       - uses: arch4edu/cactus/actions/config-makepkg@main
+        if: ${{ github.event.inputs.clean-up-ubuntu == 'true' }}
 
       - name: Add path
         run: echo "$(realpath bin)" >> $GITHUB_PATH
