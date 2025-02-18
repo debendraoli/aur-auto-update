@@ -91,7 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          token: ${{ secrets._GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: petronny/git-config-user@master
 
