@@ -38,7 +38,7 @@ for line in lines:
                 continue
             if test:
                 clean = 'false' if not "clean-up-ubuntu" in config else config["clean-up-ubuntu"]
-                github.get_repo('arch4edu/aur-auto-update').get_workflow("build.yml").create_dispatch('main', {'pkgbase': package, 'pkgver': version, 'clean-up-ubuntu': clean})
+                github.get_repo('debendraoli/aur-auto-update').get_workflow("build.yml").create_dispatch('main', {'pkgbase': package, 'pkgver': version, 'clean-up-ubuntu': clean})
                 print(f"Triggered build test for {package} {version}.")
             elif flag:
                 print(f"TODO: Flag {package} on AUR.")
