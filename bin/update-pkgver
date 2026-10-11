@@ -2,7 +2,7 @@
 newver="$1"
 force="$2"
 
-if [ -z "${force}"]
+if [ -z "${force}" ]
 then
 	oldver=$(grep -P '^pkgver' PKGBUILD | cut -d= -f2)
 	[ $(vercmp "${oldver}" "${newver}") -eq 1 ] && echo "The oldver ${oldver} is greater than newver ${newver}." && exit 1

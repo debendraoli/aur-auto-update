@@ -1,7 +1,5 @@
 #!/bin/python
 import json
-import logging
-import os
 import sys
 import traceback
 from pathlib import Path
@@ -24,7 +22,7 @@ for i in [Path(j) for j in sys.argv[1:]] if len(sys.argv) > 1 else Path("config"
             config["user_agent"] = "nvchecker"
             nvchecker_toml[i.stem] = config
         print("Loaded", i)
-    except:
+    except Exception:
         print("Failed to load", i)
         traceback.print_exc()
 

@@ -5,7 +5,7 @@ import re
 import json
 
 maintainer_line_re = re.compile(r'Maintainer:</th>[^<]*<td>([^<]*)</td>')
-maintainer_re = re.compile(r"[a-zA-z_]+")
+maintainer_re = re.compile(r"[a-zA-Z_]+")
 
 def check_sorted(config):
     keys = [i for i in config.keys()]

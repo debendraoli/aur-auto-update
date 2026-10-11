@@ -1,6 +1,7 @@
 #!/bin/sh
-newver=$(grep -P '^pkgver=' PKGBUILD | cut -d= -f2)
+pkgver=$(grep -P '^pkgver=' PKGBUILD | cut -d= -f2)
+pkgrel=$(grep -P '^pkgrel=' PKGBUILD | cut -d= -f2)
 
 git add PKGBUILD .SRCINFO
-git commit -m "Auto updated to ${newver}"
+git commit -m "upgpkg: ${pkgver}-${pkgrel}"
 git push origin master

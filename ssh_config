@@ -1,4 +1,6 @@
-Host *
+Host aur.archlinux.org
+	User aur
 	IdentityFile ~/.ssh/aur
-	StrictHostKeyChecking no
-	UserKnownHostsFile /dev/null
+	IdentitiesOnly yes
+	StrictHostKeyChecking yes
+	UserKnownHostsFile ~/.ssh/known_hosts

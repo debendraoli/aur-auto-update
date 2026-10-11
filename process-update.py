@@ -1,9 +1,6 @@
 #!/bin/python
 import json
-import logging
-import os
 import requests
-import sys
 import traceback
 from pathlib import Path
 
@@ -47,7 +44,7 @@ for line in lines:
             else:
                 print(f"No action is configured for {package}.")
                 # TODO: Comment the error to AUR
-        except:
+        except Exception:
             print(f"Failed to process update for {package}.")
             traceback.print_exc()
     elif line["event"] != "up-to-date":

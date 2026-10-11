@@ -31,12 +31,12 @@ jobs:
       - uses: arch4edu/cactus/actions/upgrade-archlinux@main
 
       - name: Install runtime dependencies
-        run: pacman -S --noconfirm --needed arch-install-scripts base-devel devtools dbus git pacman-contrib
+        run: pacman -S --noconfirm --needed arch-install-scripts base-devel devtools dbus git namcap pacman-contrib
 
       - uses: arch4edu/cactus/actions/clean-up-ubuntu@main
         if: ${{ github.event.inputs.clean-up-ubuntu == 'true' }}
 
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v7
 
       - uses: arch4edu/cactus/actions/config-makepkg@main
 
@@ -62,15 +62,35 @@ jobs:
           aur-clone ${{ github.event.inputs.pkgbase }}
           cd ${{ github.event.inputs.pkgbase }}
           chown makepkg:root -R .
-          update-pkgver ${{ github.event.inputs.pkgver }} || exit 0
+          update-pkgver ${{ github.event.inputs.pkgver }}
           su makepkg -c recv-gpg-keys || :
           if [ -f /usr/bin/custom-x86_64-build ]
           then
-            su makepkg -c custom-x86_64-build || :
+            su makepkg -c custom-x86_64-build
           else
-            su makepkg -c extra-x86_64-build || :
+            su makepkg -c extra-x86_64-build
           fi
           su makepkg -c 'makepkg --printsrcinfo' > .SRCINFO
+
+      - name: Validate .SRCINFO
+        env:
+          PKGBASE: ${{ github.event.inputs.pkgbase }}
+        run: |
+          cd "$PKGBASE"
+          [ -s .SRCINFO ] || { echo "::error::.SRCINFO is missing or empty"; exit 1; }
+          srcinfo_base=$(sed -n 's/^pkgbase = //p' .SRCINFO)
+          srcinfo_ver=$(sed -n 's/^\tpkgver = //p' .SRCINFO | head -1)
+          pkgbuild_ver=$(sed -n 's/^pkgver=//p' PKGBUILD | head -1)
+          [ "$srcinfo_base" = "$PKGBASE" ] || { echo "::error::pkgbase mismatch: .SRCINFO=$srcinfo_base expected=$PKGBASE"; exit 1; }
+          [ "$srcinfo_ver" = "$pkgbuild_ver" ] || { echo "::error::pkgver mismatch: .SRCINFO=$srcinfo_ver PKGBUILD=$pkgbuild_ver"; exit 1; }
+
+      - name: Run namcap checks
+        env:
+          PKGBASE: ${{ github.event.inputs.pkgbase }}
+        run: |
+          cd "$PKGBASE"
+          namcap PKGBUILD || :
+          namcap *.pkg.tar.zst || :
 
       - name: Export build result
         id: export
@@ -101,6 +121,7 @@ jobs:
       - name: Configure git and ssh
         run: |
           echo "${{ secrets.SSH_KEY }}" | install -Dm400 /dev/stdin ~/.ssh/aur
+          install -Dm644 known_hosts ~/.ssh/known_hosts
           cp ssh_config ~/.ssh/config
           git config --global user.name 'Auto update bot'
           git config --global user.email 'auto-update-bot@arch4edu.org'
