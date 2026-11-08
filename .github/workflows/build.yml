@@ -36,7 +36,7 @@ jobs:
       - uses: arch4edu/cactus/actions/clean-up-ubuntu@main
         if: ${{ github.event.inputs.clean-up-ubuntu == 'true' }}
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
 
       - uses: arch4edu/cactus/actions/config-makepkg@main
 
@@ -109,11 +109,11 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: petronny/git-config-user@master
+      - uses: petronny/git-config-user@v2
 
       - name: Add path
         run: echo "$(realpath bin)" >> $GITHUB_PATH
