@@ -110,8 +110,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: petronny/git-config-user@v2
-
       - name: Add path
         run: echo "$(realpath bin)" >> $GITHUB_PATH
 
