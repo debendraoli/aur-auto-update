@@ -7,7 +7,7 @@ from pathlib import Path
 import requests
 import toml
 import yaml
-from github import Github
+from github import Auth, Github
 from github.GithubException import GithubException
 from requests.adapters import HTTPAdapter
 
@@ -17,7 +17,7 @@ except ImportError:  # pragma: no cover
     Retry = None
 
 token = toml.load("config/keyfile.toml")["keys"]["github"]
-github = Github(token)
+github = Github(auth=Auth.Token(token))
 
 session = requests.Session()
 if Retry is not None:
