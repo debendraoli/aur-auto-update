@@ -131,22 +131,27 @@ symptom, not the cause. This section documents the permanent fix.
    (notably packages not published on AUR) and always exited `0`. The run stayed
    green, `oldver` never advanced, and the same package was re-detected as
    "updated" every 12 hours forever — invisible churn with no alert.
-3. **Config drift.** `wpaperd` and `centralized-relay-bin` are configured but do
+3. **Config drift.** `wpaperd` and `centralized-relay-bin` were configured but do
    not exist on AUR under those names, so they could never complete.
    `iam-policy-json-to-terraform` is maintained on AUR but was missing from
    config, so it was never auto-updated.
 
 ### What changed
 
-- **All actions pinned to commit SHAs** (with a human-readable version comment)
-  in `build.yml`, `check-update.yml`, and `check-pull-request.yml`:
-  - `arch4edu/cactus/actions/*@37ded11…` (frozen `main`)
-  - `actions/checkout@fbc6f39…` (`v5.1.0`, Node 24 native — removes the Node 20
-    deprecation warning). Note: contrary to an earlier note in this file, `v4`
-    is **older** than `v5`/`v7`; pinning to a SHA is what actually provides
-    stability, not a particular tag.
+- **Action-reference policy** (applied in `build.yml`, `check-update.yml`, and
+  `check-pull-request.yml`):
+  - **Third-party actions pinned to a commit SHA** with a version comment —
+    `arch4edu/cactus/actions/*@37ded11… # main` (frozen `main`). This is the
+    fragile dependency, so it is pinned for supply-chain safety and immunity to
+    upstream `main` changes.
+  - **Official `actions/*` tracked by latest stable major tag** —
+    `actions/checkout@v7` (Node 24 native — removes the Node 20 deprecation
+    warning). GitHub-maintained actions are trusted, so a moving major tag keeps
+    them current without manual SHA bumps. Note: contrary to an earlier note in
+    this file, `v4` is **older** than `v5`/`v7`.
 - **`.github/dependabot.yml`** added (weekly `github-actions` updates) so the
-  pinned SHAs receive controlled, reviewable bump PRs instead of going stale.
+  pinned third-party SHA and the official major tag receive controlled,
+  reviewable bump PRs instead of going stale.
 - **`process-update.py` now fails loudly:**
   - Genuine errors (dispatch failure, missing config for an updated package)
     emit `::error::` and the job exits non-zero → red run → GitHub notifies you.
@@ -154,7 +159,9 @@ symptom, not the cause. This section documents the permanent fix.
     nvchecker source error) emit a visible `::warning::` annotation instead of a
     silent `print`.
 - **Config hygiene:**
-  - `iam-policy-json-to-terraform` added to `config/debendraoli/`.
-  - `wpaperd` / `centralized-relay-bin` `oldver` bumped to the current upstream
-    version to stop the perpetual re-detection loop (configs preserved so they
-    resume automatically once published to AUR).
+  - `iam-policy-json-to-terraform` added to `config/debendraoli/` (auto-updated
+    AUR to 1.9.2 on the first run).
+  - `wpaperd` and `centralized-relay-bin` removed: they are not published on AUR
+    under those names, so they could never complete and only produced perpetual
+    re-detection churn. Re-add them (with the correct AUR pkgbase) once they are
+    published.

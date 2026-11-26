@@ -22,7 +22,7 @@ jobs:
       - name: Install runtime dependencies
         run: pacman -S --noconfirm --needed jq nvchecker python-lxml python-packaging python-pygithub python-toml python-typing_extensions python-yaml
 
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - uses: actions/checkout@v7
 
       - name: Run nvchecker
         run: |

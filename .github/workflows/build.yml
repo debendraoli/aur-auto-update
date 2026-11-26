@@ -36,7 +36,7 @@ jobs:
       - uses: arch4edu/cactus/actions/clean-up-ubuntu@37ded11ba01d3e1cba8114b2797d88bfa4b0218b # main
         if: ${{ github.event.inputs.clean-up-ubuntu == 'true' }}
 
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - uses: actions/checkout@v7
 
       - uses: arch4edu/cactus/actions/config-makepkg@37ded11ba01d3e1cba8114b2797d88bfa4b0218b # main
 
@@ -106,7 +106,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - uses: actions/checkout@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
