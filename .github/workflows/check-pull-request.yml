@@ -13,12 +13,12 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: arch4edu/cactus/actions/upgrade-archlinux@main
+      - uses: arch4edu/cactus/actions/upgrade-archlinux@37ded11ba01d3e1cba8114b2797d88bfa4b0218b # main
 
       - name: Install runtime dependencies
         run: pacman -S --noconfirm --needed git nvchecker python-requests python-toml
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           fetch-depth: 0
 

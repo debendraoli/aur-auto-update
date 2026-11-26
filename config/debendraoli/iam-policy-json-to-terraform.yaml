@@ -1,0 +1,6 @@
+nvchecker:
+  source: github
+  github: flosell/iam-policy-json-to-terraform
+  use_latest_release: true
+test: true
+oldver: 1.8.1
